@@ -1,0 +1,48 @@
+---
+title: "Vignette for xkcd distribution"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{xkcd}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Brief introduction of the xkcd distribution
+
+Suppose $f$ is the probability density function (PDF) of a normal distribution, and we have a random vector $(X,Y)$ uniformly distributed on the region bounded above by the graph of $f$ and bounded below by the horizontal axis. Then the marginal distribution of $X$ is this normal distribution, the conditional distribution of $Y$ given $X$ is uniform on the interval from zero to $f(X)$. The marginal distribution of $Y$ is the $xkcd$ distribution that we want R functions for.
+
+Let $h(y)$ be the distance from the mean of $X$ to either of the points where $f(x) = y$. Then the distribution function (DF) of $Y$ is
+$$G(y) =1-F(\mu +h(y))+F(\mu-h(y))+2yh(y) ,0<y\le f(\mu),$$
+and the probability density function (PDF) of $Y$ simplifies to
+$$ g(y) =2h(y), 0\le y\le f(\mu).$$
+  
+
+# Vignette
+
+```{r}
+library(graphics)
+library(xkcd)
+dxkcd(1/sqrt(2*pi)) == 0
+dxkcd(0) == Inf
+pxkcd(0) == 0
+pxkcd(0, log.p = T) == -Inf
+pxkcd(1/sqrt(2*pi)) == 1
+pxkcd(1/sqrt(2*pi), log.p = T) == 0
+
+## Using "log = TRUE" for an extended range :
+par(mfrow = c(2,1))
+plot(function(x) dxkcd(x, log = TRUE), 0, 1/sqrt(2*pi),
+     main = "log { Xkcd density }")
+curve(log(dxkcd(x)), add = TRUE, col = "red", lwd = 2)
+mtext("dxkcd(x, log=TRUE)", adj = 0)
+mtext("log(dxkcd(x))", col = "red", adj = 1)
+
+plot(function(x) pxkcd(x, log.p = TRUE), 0, 1/sqrt(2*pi),
+     main = "log { Xkcd Cumulative }")
+curve(log(pxkcd(x)), add = TRUE, col = "red", lwd = 2)
+mtext("pxkcd(x, log=TRUE)", adj = 0)
+mtext("log(pxkcd(x))", col = "red", adj = 1)
+```
+
+
+

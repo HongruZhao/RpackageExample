@@ -1,0 +1,9 @@
+Package: xkcd
+Version: 0.0.1
+Date: 2022-02-28
+Title: xkcd distribution
+Author: Hongru Zhao <zhao1118@umn.edu>
+Maintainer: Hongru Zhao <zhao1118@umn.edu>
+Depends: R (>= 3.1.0)
+Description: Density, distribution function, quantile function and random generation for the xkcd distribution. 
+License: CC0
