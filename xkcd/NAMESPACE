@@ -1,0 +1,5 @@
+useDynLib(xkcd,rxkcd_c,dxkcd_c,pxkcd_c,qxkcd_c)
+export(dxkcd)
+export(pxkcd)
+export(qxkcd)
+export(rxkcd)
